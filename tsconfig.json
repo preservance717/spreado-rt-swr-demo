@@ -1,13 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "esnext",
     "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -18,9 +12,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "downlevelIteration": true,
+    "noImplicitReturns": true,
+    "sourceMap": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
