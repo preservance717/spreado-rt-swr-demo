@@ -1,16 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import useSWR from "swr";
 
 const TodoList = () => {
+  const { mutate: getTodos, data: unFinishedTodos } = useSWR(
+    "/api/get/todos",
+    (url) => {
+      return [{ title: "todo1" }, { title: "todo2" }];
+    }
+  );
+
+  getTodos();
+
   return (
     <UnorderedList>
-      {[1, 2, 3].map((element, index) => (
+      {unFinishedTodos?.map((todo, index) => (
         <ListItem key={index}>
           <Checkbox>
             <input type="checkbox" id={`checkbox${index}`} />
             <label htmlFor={`checkbox${index}`}></label>
           </Checkbox>
-          <span>Todo {element}</span>
+          <span>{todo?.title}</span>
         </ListItem>
       ))}
     </UnorderedList>
