@@ -1,16 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import useSWR from "swr";
+import { useUnFinishedTodoSpreadOut } from "./state";
 
 const TodoList = () => {
-  const { mutate: getTodos, data: unFinishedTodos } = useSWR(
-    "/api/get/todos",
-    (url) => {
-      return [{ title: "todo1" }, { title: "todo2" }];
-    }
-  );
-
-  getTodos();
+  const { data: unFinishedTodos } = useUnFinishedTodoSpreadOut();
 
   return (
     <UnorderedList>
