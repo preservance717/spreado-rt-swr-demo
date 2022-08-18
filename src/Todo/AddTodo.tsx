@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { addTodo } from "./reducer";
 
 const AddTodo = () => {
-  return <Input placeholder="What needs to be done?" />;
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
+
+  return (
+    <Input
+      placeholder="What needs to be done?"
+      value={text}
+      onChange={(event) => setText(event.target.value)}
+      onKeyDown={(event) => {
+        if (event.code === "Enter") {
+          dispatch(addTodo({ title: text }));
+          setText("");
+        }
+      }}
+    />
+  );
 };
 
 const Input = styled.input`

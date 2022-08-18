@@ -1,13 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useUnFinishedTodoSpreadOut } from "./state";
 
 const TodoList = () => {
-  const { data: unFinishedTodos } = useUnFinishedTodoSpreadOut();
+  const { data: unFinishedTodos = [] } = useUnFinishedTodoSpreadOut();
+  const newAddedTodos = useSelector((state: any) => state.todo);
 
   return (
     <UnorderedList>
-      {unFinishedTodos?.map((todo, index) => (
+      {[...unFinishedTodos, ...newAddedTodos]?.map((todo, index) => (
         <ListItem key={index}>
           <Checkbox>
             <input type="checkbox" id={`checkbox${index}`} />
