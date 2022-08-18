@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { addTodo } from "./reducer";
+import { setNewTodoSpreadOut, Todo, useNewTodoSpreadIn } from "./state";
 
 const AddTodo = () => {
   const [text, setText] = useState("");
-  const dispatch = useDispatch();
+  const originalTodos = useNewTodoSpreadIn() as Todo[];
 
   return (
     <Input
@@ -14,7 +13,7 @@ const AddTodo = () => {
       onChange={(event) => setText(event.target.value)}
       onKeyDown={(event) => {
         if (event.code === "Enter") {
-          dispatch(addTodo({ title: text }));
+          setNewTodoSpreadOut(originalTodos, { title: text });
           setText("");
         }
       }}
